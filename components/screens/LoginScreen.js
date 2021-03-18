@@ -10,15 +10,19 @@ const LoginScreen = ({navigation}) => {
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                console.log('User is here')
+            console.log(authUser)
+            if (authUser) {               
                 navigation.replace('Home')
             }
         })
         return unsubscribe;
     }, []);
 
-    const signIn = () => {}
+    const signIn = () => {
+        auth
+        .signInWithEmailAndPassword(email, password)
+        .catch((error) => alert(error))
+    }
 
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -26,12 +30,33 @@ const LoginScreen = ({navigation}) => {
             <Image source={{uri: "https://blog.mozilla.org/internetcitizen/files/2018/08/signal-logo.png"}}
             style={{width: 200, height: 200}} />
             <View style={styles.InputContainer}>
-                <Input placeholder="Email" autoFocus type="Email" value={email} onChangeText={(text) => setEmail(text)} /> 
-                <Input placeholder="Password" secureTextEntry type="password" value={password} onChangeText={(text => setPassword(text))} />
+                <Input 
+                    placeholder="Email" 
+                    autoFocus 
+                    type="Email" 
+                    value={email} 
+                    onChangeText={(text) => setEmail(text)} 
+                /> 
+                <Input 
+                    placeholder="Password" 
+                    secureTextEntry 
+                    type="password" 
+                    value={password} 
+                    onChangeText={(text => setPassword(text))}
+                    onSubmitEditing={signIn}
+                />
             </View>
 
-            <Button containerStyle={styles.button} title='Login' onPress={signIn}  />
-            <Button containerStyle={styles.button} type='outline' title='Register' onPress = {() => navigation.navigate('Register')}  />
+            <Button 
+                containerStyle={styles.button} 
+                title='Login' onPress={signIn}  
+            />
+            <Button 
+                containerStyle={styles.button} 
+                type='outline' 
+                title='Register' 
+                onPress = {() => navigation.navigate('Register')}  
+            />
         </KeyboardAvoidingView>
     )
 }

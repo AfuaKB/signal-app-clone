@@ -7,22 +7,26 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './components/screens/LoginScreen';
 import RegisterScreen from './components/screens/RegisterScreen';
 import HomeScreen from './components/screens/HomeScreen';
+import AddChatScreen from './components/screens/AddChatScreen';
 
 const Stack = createStackNavigator();
 
 const globalScreenOptions = {
-  "headerStyle": {backgroundColor: "#2C6BED"},
-  "headerTitleStyle": {"color": "white"},
-  "headerTintColor": "white", //makes all icons in the header white
+  headerStyle: {backgroundColor: "#2C6BED"},
+  headerTitleStyle: {color: "white"},
+  headerTintColor: "white", //makes all icons in the header white
 }
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={globalScreenOptions}>
+      <Stack.Navigator 
+      //initialRouteName='Home' 
+      screenOptions={globalScreenOptions}>
         <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name='Register' component={RegisterScreen} />
         <Stack.Screen name='Home' component={HomeScreen} />
+        <Stack.Screen name='AddChat' component={AddChatScreen} />
       </Stack.Navigator>
       
     </NavigationContainer>

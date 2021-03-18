@@ -16,14 +16,15 @@ const RegisterScreen = ({navigation}) => {
         navigation.setOptions({
            headerBackTitle: 'Back to Login' 
         });
-    }, [navigation])
+    }, [navigation]) //we pass in navigation as its dependency
+    //because anytime the navigation changes, it updates
 
     const register = () => {
         auth.createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
-            authUser.user.update({
+            authUser.user.updateProfile({
                 displayName: name,
-                photoURL: imageURL || 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png',
+                photoURL: imageUrl ? imageUrl : 'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png',
             })
         } ).catch((error) => alert(error.message))
     }
